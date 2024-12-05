@@ -146,13 +146,74 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "#[ \t]*include"
+              },
+              "named": false,
+              "value": "#include"
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "path",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "string_literal"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "system_lib_string"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "preproc_call_expression"
+                },
+                "named": true,
+                "value": "call_expression"
+              }
+            ]
+          }
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
           "content": {
             "type": "PATTERN",
-            "value": "#[ \t]*include"
-          },
-          "named": false,
-          "value": "#include"
+            "value": "\\r?\\n"
+          }
+        }
+      ]
+    },
+    "preproc_embed": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "#[ \t]*embed"
+              },
+              "named": false,
+              "value": "#embed"
+            }
+          ]
         },
         {
           "type": "FIELD",
@@ -8653,6 +8714,10 @@
                   "members": [
                     {
                       "type": "SYMBOL",
+                      "name": "preproc_embed"
+                    },
+                    {
+                      "type": "SYMBOL",
                       "name": "initializer_pair"
                     },
                     {
@@ -8677,6 +8742,10 @@
                       {
                         "type": "CHOICE",
                         "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "preproc_embed"
+                          },
                           {
                             "type": "SYMBOL",
                             "name": "initializer_pair"

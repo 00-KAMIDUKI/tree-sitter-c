@@ -2216,6 +2216,10 @@
         {
           "type": "initializer_pair",
           "named": true
+        },
+        {
+          "type": "preproc_embed",
+          "named": true
         }
       ]
     }
@@ -3011,6 +3015,34 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "preproc_embed",
+    "named": true,
+    "fields": {
+      "path": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "system_lib_string",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -4001,6 +4033,10 @@
   },
   {
     "type": "#else",
+    "named": false
+  },
+  {
+    "type": "#embed",
     "named": false
   },
   {

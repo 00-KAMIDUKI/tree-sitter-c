@@ -33,6 +33,7 @@
 "#ifdef" @keyword
 "#ifndef" @keyword
 "#include" @keyword
+"#embed" @keyword
 (preproc_directive) @keyword
 
 "--" @operator

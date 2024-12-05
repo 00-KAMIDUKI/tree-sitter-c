@@ -122,7 +122,18 @@ module.exports = grammar({
     // Preprocesser
 
     preproc_include: $ => seq(
-      preprocessor('include'),
+      choice(preprocessor('include')),
+      field('path', choice(
+        $.string_literal,
+        $.system_lib_string,
+        $.identifier,
+        alias($.preproc_call_expression, $.call_expression),
+      )),
+      token.immediate(/\r?\n/),
+    ),
+
+    preproc_embed: $ => seq(
+      choice(preprocessor('embed')),
       field('path', choice(
         $.string_literal,
         $.system_lib_string,
@@ -1223,6 +1234,7 @@ module.exports = grammar({
     initializer_list: $ => seq(
       '{',
       commaSep(choice(
+        $.preproc_embed,
         $.initializer_pair,
         $.expression,
         $.initializer_list,
